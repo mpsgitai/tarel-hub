@@ -1,0 +1,1 @@
+"""TAREL duckdb metadata connector."""

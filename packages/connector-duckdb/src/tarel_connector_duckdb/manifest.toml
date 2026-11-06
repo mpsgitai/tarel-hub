@@ -1,0 +1,11 @@
+[connector]
+contract_version = 1
+name = "duckdb"
+version = "0.0.1"
+source_type = "duckdb"
+entrypoint = "tarel_connector_duckdb.connector:create_connector"
+extra = "duckdb"
+capabilities = ["probe", "discover_catalog"]
+dependencies = ["duckdb"]
+permissions = ["read"]
+dialect = "duckdb"

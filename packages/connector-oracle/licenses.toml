@@ -1,0 +1,18 @@
+# Direct dependencies. tools/check_licenses.py fails when this differs from pyproject.toml.
+[[dependency]]
+name = "tarel"
+requirement = "tarel>=0.0.3,<0.1"
+spdx = "MIT"
+source = "https://github.com/mpsgitai/tarel"
+verified_version = "0.0.3"
+verified_on = "2026-11-04"
+evidence = "license field and LICENSE in the host repository at the commit in docs/compatibility"
+
+[[dependency]]
+name = "oracledb"
+requirement = "oracledb>=26.1,<27"
+spdx = "UPL-1.0 OR Apache-2.0"
+source = "https://pypi.org/project/oracledb/"
+verified_version = "26.1.0"
+verified_on = "2026-11-04"
+evidence = "dist-info/licenses of oracledb-26.1.0-cp312 manylinux wheel"

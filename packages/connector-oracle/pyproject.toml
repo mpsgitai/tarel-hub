@@ -1,0 +1,38 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "tarel-connector-oracle"
+version = "0.0.1"
+description = "Read-only Oracle metadata connector for TAREL, over python-oracledb Thin mode."
+readme = "README.md"
+requires-python = ">=3.11"
+license-files = ["LICENSE-PENDING.md", "THIRD_PARTY_NOTICES.md"]
+classifiers = [
+  "Development Status :: 2 - Pre-Alpha",
+  "Private :: Do Not Upload",
+  "Programming Language :: Python :: 3",
+  "Topic :: Database",
+]
+dependencies = [
+  "tarel>=0.0.3,<0.1",
+  "oracledb>=26.1,<27",
+]
+
+[project.entry-points."tarel.connectors"]
+oracle = "tarel_connector_oracle.connector:create_connector"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/tarel_connector_oracle"]
+
+[tool.hatch.build.targets.sdist]
+only-include = [
+  "LICENSE-PENDING.md",
+  "README.md",
+  "THIRD_PARTY_NOTICES.md",
+  "licenses.toml",
+  "pyproject.toml",
+  "src",
+  "tests",
+]

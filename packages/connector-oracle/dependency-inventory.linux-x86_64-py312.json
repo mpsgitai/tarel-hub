@@ -1,0 +1,95 @@
+{
+  "note": "What one fresh environment resolved. Evidence for review, not legal advice.",
+  "open_findings": [
+    "tarel-connector-oracle"
+  ],
+  "platform": "linux-x86_64-py312",
+  "resolved": [
+    {
+      "license": "MIT-0",
+      "license_basis": "License-Expression",
+      "license_files": [
+        "cffi-2.1.1.dist-info/licenses/LICENSE"
+      ],
+      "name": "cffi",
+      "native_files": [
+        "_cffi_backend.cpython-312-x86_64-linux-gnu.so"
+      ],
+      "version": "2.1.1"
+    },
+    {
+      "license": "Apache-2.0 OR BSD-3-Clause",
+      "license_basis": "License-Expression",
+      "license_files": [
+        "cryptography-50.0.2.dist-info/licenses/LICENSE",
+        "cryptography-50.0.2.dist-info/licenses/LICENSE.APACHE",
+        "cryptography-50.0.2.dist-info/licenses/LICENSE.BSD"
+      ],
+      "name": "cryptography",
+      "native_files": [
+        "cryptography/hazmat/bindings/_rust.abi3.so"
+      ],
+      "version": "50.0.2"
+    },
+    {
+      "license": "UPL-1.0 OR Apache-2.0",
+      "license_basis": "License-Expression",
+      "license_files": [
+        "oracledb-26.1.0.dist-info/licenses/LICENSE.txt",
+        "oracledb-26.1.0.dist-info/licenses/NOTICE.txt",
+        "oracledb-26.1.0.dist-info/licenses/THIRD_PARTY_LICENSES.txt"
+      ],
+      "name": "oracledb",
+      "native_files": [
+        "oracledb/arrow_impl.cpython-312-x86_64-linux-gnu.so",
+        "oracledb/base_impl.cpython-312-x86_64-linux-gnu.so",
+        "oracledb/thick_impl.cpython-312-x86_64-linux-gnu.so",
+        "oracledb/thin_impl.cpython-312-x86_64-linux-gnu.so"
+      ],
+      "version": "26.1.0"
+    },
+    {
+      "license": "BSD-3-Clause",
+      "license_basis": "License-Expression",
+      "license_files": [
+        "pycparser-3.12.dist-info/licenses/LICENSE"
+      ],
+      "name": "pycparser",
+      "native_files": [],
+      "version": "3.12"
+    },
+    {
+      "license": "MIT",
+      "license_basis": "License-Expression",
+      "license_files": [
+        "tarel-0.0.3.dist-info/licenses/LICENSE",
+        "tarel-0.0.3.dist-info/licenses/THIRD_PARTY_NOTICES.md",
+        "tarel/ui/static/CYTOSCAPE_LICENSE.txt"
+      ],
+      "name": "tarel",
+      "native_files": [],
+      "version": "0.0.3"
+    },
+    {
+      "license": null,
+      "license_basis": null,
+      "license_files": [
+        "tarel_connector_oracle-0.0.1.dist-info/licenses/LICENSE-PENDING.md",
+        "tarel_connector_oracle-0.0.1.dist-info/licenses/THIRD_PARTY_NOTICES.md"
+      ],
+      "name": "tarel-connector-oracle",
+      "native_files": [],
+      "version": "0.0.1"
+    },
+    {
+      "license": "PSF-2.0",
+      "license_basis": "License-Expression",
+      "license_files": [
+        "typing_extensions-4.16.0.dist-info/licenses/LICENSE"
+      ],
+      "name": "typing_extensions",
+      "native_files": [],
+      "version": "4.16.0"
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "note": "What one fresh environment resolved. Evidence for review, not legal advice.",
+  "open_findings": [
+    "tarel-connector-mongodb"
+  ],
+  "platform": "linux-x86_64-py312",
+  "resolved": [
+    {
+      "license": "ISC",
+      "license_basis": "License-Expression",
+      "license_files": [
+        "dnspython-2.9.2.dist-info/licenses/LICENSE"
+      ],
+      "name": "dnspython",
+      "native_files": [],
+      "version": "2.9.2"
+    },
+    {
+      "license": "Apache-2.0",
+      "license_basis": "License-Expression",
+      "license_files": [
+        "pymongo-4.19.0.dist-info/licenses/LICENSE"
+      ],
+      "name": "pymongo",
+      "native_files": [
+        "bson/_cbson.cpython-312-x86_64-linux-gnu.so",
+        "pymongo/_cmessage.cpython-312-x86_64-linux-gnu.so"
+      ],
+      "version": "4.19.0"
+    },
+    {
+      "license": "MIT",
+      "license_basis": "License-Expression",
+      "license_files": [
+        "tarel-0.0.3.dist-info/licenses/LICENSE",
+        "tarel-0.0.3.dist-info/licenses/THIRD_PARTY_NOTICES.md",
+        "tarel/ui/static/CYTOSCAPE_LICENSE.txt"
+      ],
+      "name": "tarel",
+      "native_files": [],
+      "version": "0.0.3"
+    },
+    {
+      "license": null,
+      "license_basis": null,
+      "license_files": [
+        "tarel_connector_mongodb-0.0.1.dist-info/licenses/LICENSE-PENDING.md",
+        "tarel_connector_mongodb-0.0.1.dist-info/licenses/THIRD_PARTY_NOTICES.md"
+      ],
+      "name": "tarel-connector-mongodb",
+      "native_files": [],
+      "version": "0.0.1"
+    }
+  ]
+}

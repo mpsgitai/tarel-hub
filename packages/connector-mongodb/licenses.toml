@@ -1,0 +1,17 @@
+[[dependency]]
+name = "tarel"
+requirement = "tarel>=0.0.3,<0.1"
+spdx = "MIT"
+source = "https://github.com/mpsgitai/tarel"
+verified_version = "0.0.3"
+verified_on = "2026-11-04"
+evidence = "license field and LICENSE in the host repository at the commit in docs/compatibility"
+
+[[dependency]]
+name = "pymongo"
+requirement = "pymongo==4.19.0"
+spdx = "Apache-2.0"
+source = "https://pypi.org/project/pymongo/4.19.0/"
+verified_version = "4.19.0"
+verified_on = "2026-11-05"
+evidence = "Published wheel dist-info/licenses/LICENSE"

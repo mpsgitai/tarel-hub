@@ -1,0 +1,153 @@
+{
+  "checks": [
+    {
+      "evidence": "real",
+      "name": "wheel and sdist build",
+      "passed": true
+    },
+    {
+      "evidence": "real",
+      "name": "distribution rules pass",
+      "passed": true
+    },
+    {
+      "evidence": "real",
+      "name": "license records match the dependencies",
+      "passed": true
+    },
+    {
+      "evidence": "real",
+      "name": "host alone installs and starts",
+      "passed": true
+    },
+    {
+      "evidence": "real",
+      "name": "host alone brings no optional driver",
+      "passed": true
+    },
+    {
+      "evidence": "real",
+      "name": "without the package the host does not know oracle",
+      "passed": true
+    },
+    {
+      "evidence": "real",
+      "name": "local-host: imported from the environment, not this repository",
+      "passed": true
+    },
+    {
+      "evidence": "real",
+      "name": "local-host: connector check finds it",
+      "passed": true
+    },
+    {
+      "evidence": "real",
+      "name": "local-host: discovery imports no driver",
+      "passed": true
+    },
+    {
+      "evidence": "real",
+      "name": "local-host: other drivers stay absent",
+      "passed": true
+    },
+    {
+      "evidence": "real",
+      "name": "local-host: discovery works without a network",
+      "passed": true
+    },
+    {
+      "evidence": "real-driver-no-database",
+      "name": "local-host: real driver, closed port: clean failure, no secret",
+      "passed": true
+    },
+    {
+      "evidence": "mock-driver",
+      "name": "local-host: first graph through the real CLI",
+      "passed": true
+    },
+    {
+      "evidence": "mock-driver",
+      "name": "local-host: graph holds objects and no connection details",
+      "passed": true
+    },
+    {
+      "evidence": "mock-driver",
+      "name": "local-host: refresh through the real CLI",
+      "passed": true
+    },
+    {
+      "evidence": "real",
+      "name": "resolved dependencies inventoried",
+      "passed": true
+    },
+    {
+      "evidence": "real",
+      "name": "the sdist installs too",
+      "passed": true
+    },
+    {
+      "evidence": "real",
+      "name": "public-0.0.3: imported from the environment, not this repository",
+      "passed": true
+    },
+    {
+      "evidence": "real",
+      "name": "public-0.0.3: connector check finds it",
+      "passed": true
+    },
+    {
+      "evidence": "real",
+      "name": "public-0.0.3: discovery imports no driver",
+      "passed": true
+    },
+    {
+      "evidence": "real",
+      "name": "public-0.0.3: other drivers stay absent",
+      "passed": true
+    },
+    {
+      "evidence": "real",
+      "name": "public-0.0.3: discovery works without a network",
+      "passed": true
+    },
+    {
+      "evidence": "real-driver-no-database",
+      "name": "public-0.0.3: real driver, closed port: clean failure, no secret",
+      "passed": true
+    },
+    {
+      "evidence": "mock-driver",
+      "name": "public-0.0.3: first graph through the real CLI",
+      "passed": true
+    },
+    {
+      "evidence": "mock-driver",
+      "name": "public-0.0.3: graph holds objects and no connection details",
+      "passed": true
+    },
+    {
+      "evidence": "mock-driver",
+      "name": "public-0.0.3: refresh through the real CLI",
+      "passed": true
+    }
+  ],
+  "host": {
+    "commit": "eeb559f73a174495b79aec55b9d10edf34df8250",
+    "dirty": false
+  },
+  "public_host": {
+    "passed": true,
+    "version": "0.0.3"
+  },
+  "real_database": "BLOCKED: no authorized instance",
+  "resolved_versions": {
+    "cffi": "2.1.1",
+    "cryptography": "50.0.2",
+    "oracledb": "26.1.0",
+    "pycparser": "3.12",
+    "tarel": "0.0.3",
+    "tarel-connector-oracle": "0.0.1",
+    "typing-extensions": "4.16.0"
+  },
+  "tested_on": "2026-11-04"
+}

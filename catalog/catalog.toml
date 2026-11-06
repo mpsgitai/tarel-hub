@@ -1,0 +1,111 @@
+# What exists for TAREL and how to get it. Reading this imports no plugin, and an entry authorizes
+# neither installation nor activation. Status says what has really been shown, never what is hoped.
+#
+# status: builtin       ships inside the host; no hub package
+#         experimental  loadable by an unchanged host, not proven against the real source
+#         planned       not built; do not expect it to work
+contract_version = 1
+
+[[extension]]
+id = "connector-oracle"
+capabilities = ["connector"]
+status = "experimental"
+package = "tarel-connector-oracle"
+import_name = "tarel_connector_oracle"
+path = "packages/connector-oracle"
+entry_point = { group = "tarel.connectors", name = "oracle" }
+host_contract = "connector.v1"
+host_versions = "tested commits: docs/compatibility/connector-oracle.json"
+dependencies = ["oracledb>=26.1,<27"]
+native_requirements = []
+license = "undecided; see LICENSE-PENDING.md"
+origin = "written in this repository"
+install = "uv build packages/connector-oracle, then install the wheel next to the host"
+real_source_evidence = "BLOCKED: no authorized Oracle instance"
+
+[[extension]]
+id = "connector-sqlserver"
+capabilities = ["connector"]
+status = "builtin"
+package = "tarel"
+import_name = "tarel.connectors.sqlserver"
+entry_point = { group = "built into the host", name = "sqlserver" }
+host_contract = "connector.v1"
+host_versions = "part of the host"
+dependencies = ["pymssql>=2.3,<3"]
+native_requirements = ["FreeTDS, OpenSSL and Kerberos arrive inside the pymssql wheel"]
+license = "host MIT; pymssql LGPL-2.1; see docs/inventory.md for the open finding"
+origin = "TAREL host"
+install = "pip install 'tarel[sqlserver]'"
+real_source_evidence = "not assessed here"
+note = "A hub package would be silently ignored today: see docs/host-proposals/0001-connector-name-collision.md"
+
+[[extension]]
+id = "importer-documents"
+capabilities = ["importer"]
+status = "planned"
+host_contract = "existing knowledge use cases; no plugin group"
+dependencies = []
+native_requirements = []
+license = "undecided"
+origin = "planned for this repository"
+install = "not available"
+real_source_evidence = "not started"
+
+[[extension]]
+id = "lineage-sqlglot"
+capabilities = ["lineage-analysis"]
+status = "planned"
+host_contract = "none yet: the host has no entry point for analyzers; see docs/host-proposals/0003-missing-extension-points.md"
+dependencies = ["sqlglot>=30.19,<30.20"]
+native_requirements = []
+license = "undecided"
+origin = "today in the host as tarel.lineage.sqlglot_adapter, installed by tarel[sql-lineage]"
+install = "not available from the hub; the host extra keeps working"
+real_source_evidence = "not started"
+
+[[extension]]
+id = "retrieval-llamacpp"
+capabilities = ["embeddings", "reranking"]
+status = "planned"
+host_contract = "none yet: the host has no entry point for retrieval; see docs/host-proposals/0003-missing-extension-points.md"
+dependencies = ["llama-cpp-python>=0.3.16,<0.4"]
+native_requirements = ["llama.cpp inside llama-cpp-python", "GGUF model files fetched separately"]
+license = "undecided"
+origin = "today in the host as tarel.retrieval.local and rerank, installed by tarel[local-rag]"
+install = "not available from the hub; the host extra keeps working"
+real_source_evidence = "not started"
+
+[[extension]]
+id = "connector-duckdb"
+capabilities = ["connector"]
+status = "experimental"
+package = "tarel-connector-duckdb"
+import_name = "tarel_connector_duckdb"
+path = "packages/connector-duckdb"
+entry_point = { group = "tarel.connectors", name = "duckdb" }
+host_contract = "connector.v1"
+host_versions = "local eeb559f"
+dependencies = ["duckdb==2.0.0"]
+native_requirements = ["Provided by separately installed driver wheel"]
+license = "undecided; see LICENSE-PENDING.md"
+origin = "original Hub adapter"
+install = "install ./packages/connector-duckdb next to the tested host"
+real_source_evidence = "see docs/hub-review.md"
+
+[[extension]]
+id = "connector-mongodb"
+capabilities = ["connector"]
+status = "experimental"
+package = "tarel-connector-mongodb"
+import_name = "tarel_connector_mongodb"
+path = "packages/connector-mongodb"
+entry_point = { group = "tarel.connectors", name = "mongodb" }
+host_contract = "connector.v1"
+host_versions = "local eeb559f"
+dependencies = ["pymongo==4.19.0"]
+native_requirements = ["Provided by separately installed driver wheel"]
+license = "undecided; see LICENSE-PENDING.md"
+origin = "original Hub adapter"
+install = "install ./packages/connector-mongodb next to the tested host"
+real_source_evidence = "see docs/hub-review.md"

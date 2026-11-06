@@ -1,0 +1,5 @@
+# Tools for working in this repository. Installing them installs no extension.
+build>=1.2,<2
+mypy>=1.15
+pytest>=8,<10
+ruff>=0.11

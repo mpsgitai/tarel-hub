@@ -1,0 +1,10 @@
+[connector]
+contract_version = 1
+name = "mongodb"
+version = "0.0.1"
+source_type = "mongodb"
+entrypoint = "tarel_connector_mongodb.connector:create_connector"
+extra = "mongodb"
+capabilities = ["probe", "discover_catalog"]
+dependencies = ["pymongo"]
+permissions = ["read"]

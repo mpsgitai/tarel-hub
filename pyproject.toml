@@ -1,0 +1,21 @@
+# Settings for working in this repository only. It is not a package: installing the hub is not a
+# thing, and each extension under packages/ is built and installed on its own.
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+extend-exclude = ["packages/*/tests/fake_driver"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]
+
+[tool.ruff.lint.per-file-ignores]
+"tools/check_licenses.py" = ["E501"]
+
+[tool.mypy]
+python_version = "3.11"
+ignore_missing_imports = true
+files = ["packages/*/src", "tools"]
+
+[tool.pytest.ini_options]
+testpaths = ["contract-tests", "packages"]
+addopts = "-p no:cacheprovider"
