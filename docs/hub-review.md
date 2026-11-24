@@ -29,4 +29,4 @@ Das Hub-Paket enthält den eigenen Adapter, das Manifest und Notices. Nur die In
 
 - DuckDB 2.0.0 trägt MIT. Das Python-Wheel enthält zusätzlich eine Apache-2.0-Lizenz unter duckdb/experimental/spark/LICENSE. [Anbieterpaket](https://pypi.org/project/duckdb/2.0.0/)
 - PyMongo 4.19.0 trägt Apache-2.0, seine hier aufgelöste Abhängigkeit dnspython 2.9.2 ISC. Der MongoDB-Server wird durch das Paket weder installiert noch verteilt. [Anbieterpaket](https://pypi.org/project/pymongo/4.19.0/)
-- Eigene Veröffentlichungslizenz und Rechteinhaber sind offen. Beide Pakete tragen bis zur Entscheidung LICENSE-PENDING und den privaten PyPI-Klassifikator. Offline-Wheelhouse oder Container separat nach tatsächlichem Lieferumfang und Notices beurteilen.
+- Eigene Lizenz: MIT (MPS), je Paket eine `LICENSE`. Bis zur PyPI-Entscheidung bleibt der private PyPI-Klassifikator. Offline-Wheelhouse oder Container separat nach tatsächlichem Lieferumfang und Notices beurteilen.

@@ -1,0 +1,39 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "tarel-connector-mysql"
+version = "0.0.1"
+description = "Read-only MySQL and MariaDB metadata connector for TAREL."
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+license-files = ["LICENSE", "THIRD_PARTY_NOTICES.md"]
+classifiers = [
+  "Development Status :: 2 - Pre-Alpha",
+  "Private :: Do Not Upload",
+  "Programming Language :: Python :: 3",
+  "Topic :: Database",
+]
+dependencies = [
+  "tarel>=0.0.3,<0.1",
+  "PyMySQL==1.2.4",
+]
+
+[project.entry-points."tarel.connectors"]
+mysql = "tarel_connector_mysql.connector:create_connector"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/tarel_connector_mysql"]
+
+[tool.hatch.build.targets.sdist]
+only-include = [
+  "LICENSE",
+  "README.md",
+  "THIRD_PARTY_NOTICES.md",
+  "licenses.toml",
+  "pyproject.toml",
+  "src",
+  "tests",
+]

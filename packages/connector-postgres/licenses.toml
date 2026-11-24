@@ -1,0 +1,26 @@
+[[dependency]]
+name = "tarel"
+requirement = "tarel>=0.0.3,<0.1"
+spdx = "MIT"
+source = "https://github.com/mpsgitai/tarel"
+verified_version = "0.0.5"
+verified_on = "2026-11-24"
+evidence = "license field and LICENSE in the published tarel 0.0.5 wheel"
+
+[[dependency]]
+name = "psycopg"
+requirement = "psycopg==3.3.9"
+spdx = "LGPL-3.0-only"
+source = "https://pypi.org/project/psycopg/3.3.9/"
+verified_version = "3.3.9"
+verified_on = "2026-11-24"
+evidence = "License-Expression in the published wheel metadata"
+
+[[dependency]]
+name = "psycopg-binary"
+requirement = "psycopg-binary==3.3.9"
+spdx = "LGPL-3.0-only"
+source = "https://pypi.org/project/psycopg-binary/3.3.9/"
+verified_version = "3.3.9"
+verified_on = "2026-11-24"
+evidence = "License-Expression in the published wheel metadata; bundles libpq, OpenSSL, Kerberos and OpenLDAP libraries"

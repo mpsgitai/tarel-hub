@@ -20,7 +20,7 @@ from dataclasses import dataclass
 from email.parser import Parser
 from pathlib import Path, PurePosixPath
 
-ALLOWED_SUFFIXES = frozenset({".md", ".py", ".pyi", ".toml", ".txt", ".json", ".typed"})
+ALLOWED_SUFFIXES = frozenset({".md", ".py", ".pyi", ".sql", ".toml", ".txt", ".json", ".typed"})
 ALLOWED_WHEEL_METADATA = frozenset({"METADATA", "RECORD", "WHEEL", "entry_points.txt"})
 PRIVATE_FILES = frozenset({"AGENTS.md", "OPUS_IMPLEMENTATION_PROMPT.md"})
 VENDOR_DIRECTORIES = frozenset({"_vendor", "vendor", "vendored", "site-packages", "node_modules"})

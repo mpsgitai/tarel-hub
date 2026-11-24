@@ -1,0 +1,11 @@
+[connector]
+contract_version = 1
+name = "clickhouse"
+version = "0.0.1"
+source_type = "clickhouse"
+entrypoint = "tarel_connector_clickhouse.connector:create_connector"
+extra = "clickhouse"
+capabilities = ["probe", "discover_catalog"]
+dependencies = ["clickhouse_connect"]
+permissions = ["read"]
+dialect = "clickhouse"
