@@ -1,0 +1,17 @@
+[[dependency]]
+name = "tarel"
+requirement = "tarel>=0.0.3,<0.1"
+spdx = "MIT"
+source = "https://github.com/mpsgitai/tarel"
+verified_version = "0.0.5"
+verified_on = "2026-11-24"
+evidence = "license field and LICENSE in the published tarel 0.0.5 wheel"
+
+[[dependency]]
+name = "clickhouse-connect"
+requirement = "clickhouse-connect==1.13.0"
+spdx = "Apache-2.0"
+source = "https://pypi.org/project/clickhouse-connect/1.13.0/"
+verified_version = "1.13.0"
+verified_on = "2026-11-24"
+evidence = "License-Expression in the published wheel metadata; transitive packages are listed in the dependency inventory"

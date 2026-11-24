@@ -13,7 +13,7 @@ geprüft werden und was die Prüfung nicht leistet.
 | Dependency-Änderung braucht Lizenzprüfung | `tools/check_licenses.py` vergleicht `pyproject.toml`, `licenses.toml` und die Notices | Die Einträge pflegt ein Mensch |
 | Tatsächlicher Bestand | `dependency-inventory.<plattform>.json` aus einer frischen Umgebung | Gilt für eine Plattform; Lizenzangaben stammen aus Paketmetadaten |
 | Entry Point passt zum Manifest | `tools/check_distribution.py` | – |
-| Eigene Lizenz offen | `Private :: Do Not Upload` ist Pflicht, solange sie nicht entschieden ist | Ein Index lehnt so ein Paket ab, lokal bleibt es installierbar |
+| Eigene Lizenz (MIT) oder Upload-Sperre | Ein Wheel braucht eine eigene `LICENSE` oder `Private :: Do Not Upload`; heute tragen die Pakete beides | Ein Index lehnt ein gesperrtes Paket ab, lokal bleibt es installierbar |
 
 Ein bestandener Lauf ist Evidenz für eine Prüfung, keine Rechtsgarantie.
 

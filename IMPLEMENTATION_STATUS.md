@@ -1,10 +1,12 @@
 # Implementierungsstand
 
+Stand 24.11.2026: PostgreSQL, MySQL/MariaDB und ClickHouse neu; Oracle erstmals gegen eine echte Datenbank. Evidenz: [echte Quellen](docs/real-source-tests.md). Die Abschnitte darunter beschreiben ältere Stände.
+
 Stand 05.11.2026 für DuckDB, MongoDB und die Prüfung der Vertrauensgrenzen: [Hub-Review](docs/hub-review.md). Die folgenden Oracle-Angaben dokumentieren den früheren Stand.
 Stand 04.11.2026, Lieferschritte 1 bis 3 von 6. Host: `../TAREL_REFACTOR` auf `eeb559f`, sauber.
 Einzelergebnisse stehen in [docs/compatibility/connector-oracle.json](docs/compatibility/connector-oracle.json).
 
-**Kein Paket ist freigegeben oder veröffentlicht. Der Connector lief nie gegen eine echte Oracle-Datenbank.**
+**Kein Paket ist freigegeben oder veröffentlicht.**
 
 ## Implementiert und getestet
 
@@ -29,7 +31,7 @@ Einzelergebnisse stehen in [docs/compatibility/connector-oracle.json](docs/compa
 
 | Punkt | Grund | Was es braucht |
 | --- | --- | --- |
-| Oracle gegen echte Datenbank | Keine autorisierte Instanz | Eine Testinstanz: **eine echte Datenbank kann SQL und Rechteverhalten anders zeigen als der Mock** |
+| ~~Oracle gegen echte Datenbank~~ | Erledigt am 24.11.2026 mit Oracle 23ai Free im Container | siehe docs/real-source-tests.md |
 | SQL Server als Hub-Paket | Der Host überschattet den Namen still | Entscheidung zu [Vorschlag 0001](docs/host-proposals/0001-connector-name-collision.md) |
 | SQLGlot, Embeddings, Reranking als Pakete | Keine Host-Grenze | Entscheidung zu [Vorschlag 0003](docs/host-proposals/0003-missing-extension-points.md) |
 | Entzogenes Recht von Löschung unterscheiden | Vertrag kann es nicht ausdrücken | Entscheidung zu [Vorschlag 0002](docs/host-proposals/0002-observation-completeness.md) |
@@ -47,7 +49,7 @@ restliche Host-Suite lief dafür nicht. Der Host selbst blieb unverändert.
 
 ## Offene Befunde
 
-- **Eigene Lizenz** nicht entschieden: `Private :: Do Not Upload` schützt vor Veröffentlichung.
+- **Eigene Lizenz** am 24.11.2026 als MIT entschieden. `Private :: Do Not Upload` bleibt, bis PyPI entschieden ist.
 - **pymssql 2.4.6** bündelt OpenSSL 1.1.1k, Kerberos und weitere Bibliotheken, liefert aber nur den
   LGPL-Text mit. Ein eigenes Offline-Bundle wäre davon direkt betroffen, siehe
   [docs/inventory.md](docs/inventory.md).

@@ -182,7 +182,7 @@ def test_every_package_here_matches_its_records():
 
 
 def test_no_binary_or_foreign_files_are_tracked_in_the_repository():
-    allowed = {".md", ".py", ".toml", ".txt", ".json", ".patch", ""}
+    allowed = {".md", ".py", ".sql", ".toml", ".txt", ".json", ".patch", ""}
     for path in ROOT.rglob("*"):
         parts = set(path.relative_to(ROOT).parts)
         if path.is_dir() or parts & {".git", ".venv", "__pycache__", "dist", ".pytest_cache"}:

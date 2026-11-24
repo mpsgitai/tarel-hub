@@ -85,7 +85,11 @@ def check_package(package: Path) -> list[str]:
         missing = REQUIRED_FIELDS - set(record)
         if missing:
             problems.append(f"{package.name}: {record.get('name')} lacks {sorted(missing)}")
-    declared = sorted(project.get("dependencies", []))
+    # Optional extras are installable dependencies too and need the same license record.
+    extras = project.get("optional-dependencies", {})
+    declared = sorted(
+        [*project.get("dependencies", []), *(r for group in extras.values() for r in group)]
+    )
     recorded = sorted(str(record.get("requirement")) for record in records)
     if declared != recorded:
         problems.append(f"{package.name}: pyproject has {declared}, licenses.toml has {recorded}")

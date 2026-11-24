@@ -18,10 +18,10 @@ host_contract = "connector.v1"
 host_versions = "tested commits: docs/compatibility/connector-oracle.json"
 dependencies = ["oracledb>=26.1,<27"]
 native_requirements = []
-license = "undecided; see LICENSE-PENDING.md"
+license = "MIT (adapter); driver licenses: see the package THIRD_PARTY_NOTICES.md"
 origin = "written in this repository"
 install = "uv build packages/connector-oracle, then install the wheel next to the host"
-real_source_evidence = "BLOCKED: no authorized Oracle instance"
+real_source_evidence = "Oracle Database 23ai Free (23.26.4) container fixture, 2026-11-24"
 
 [[extension]]
 id = "connector-sqlserver"
@@ -37,7 +37,7 @@ native_requirements = ["FreeTDS, OpenSSL and Kerberos arrive inside the pymssql 
 license = "host MIT; pymssql LGPL-2.1; see docs/inventory.md for the open finding"
 origin = "TAREL host"
 install = "pip install 'tarel[sqlserver]'"
-real_source_evidence = "not assessed here"
+real_source_evidence = "SQL Server 2025 (17.0.1000.7) on Windows, 2026-11-24: SQL login path built in; Windows authentication needs the host auth contract (only a throwaway patch proved it)"
 note = "A hub package would be silently ignored today: see docs/host-proposals/0001-connector-name-collision.md"
 
 [[extension]]
@@ -88,10 +88,61 @@ host_contract = "connector.v1"
 host_versions = "local eeb559f"
 dependencies = ["duckdb==2.0.0"]
 native_requirements = ["Provided by separately installed driver wheel"]
-license = "undecided; see LICENSE-PENDING.md"
+license = "MIT (adapter); driver licenses: see the package THIRD_PARTY_NOTICES.md"
 origin = "original Hub adapter"
 install = "install ./packages/connector-duckdb next to the tested host"
 real_source_evidence = "see docs/hub-review.md"
+
+[[extension]]
+id = "connector-postgres"
+capabilities = ["connector"]
+status = "experimental"
+package = "tarel-connector-postgres"
+import_name = "tarel_connector_postgres"
+path = "packages/connector-postgres"
+entry_point = { group = "tarel.connectors", name = "postgres" }
+host_contract = "connector.v1"
+host_versions = "tarel 0.0.5 (PyPI build of master 5785a00)"
+dependencies = ["psycopg==3.3.9"]
+native_requirements = ["libpq from the system, or the optional [binary] extra (psycopg-binary bundles libpq, OpenSSL, Kerberos, OpenLDAP)"]
+license = "MIT (adapter); driver licenses: see the package THIRD_PARTY_NOTICES.md"
+origin = "original Hub adapter"
+install = "install ./packages/connector-postgres[binary] next to the tested host"
+real_source_evidence = "PostgreSQL 17.7 container fixture and local PostgreSQL 17.7 / 16.3 servers, 2026-11-24"
+
+[[extension]]
+id = "connector-mysql"
+capabilities = ["connector"]
+status = "experimental"
+package = "tarel-connector-mysql"
+import_name = "tarel_connector_mysql"
+path = "packages/connector-mysql"
+entry_point = { group = "tarel.connectors", name = "mysql" }
+host_contract = "connector.v1"
+host_versions = "tarel 0.0.5 (PyPI build of master 5785a00)"
+dependencies = ["PyMySQL==1.2.4"]
+native_requirements = []
+license = "MIT (adapter); driver licenses: see the package THIRD_PARTY_NOTICES.md"
+origin = "original Hub adapter"
+install = "install ./packages/connector-mysql next to the tested host"
+real_source_evidence = "MySQL 8.4.13 and MariaDB 11.4.13 container fixtures, 2026-11-24"
+
+[[extension]]
+id = "connector-clickhouse"
+capabilities = ["connector"]
+status = "experimental"
+package = "tarel-connector-clickhouse"
+import_name = "tarel_connector_clickhouse"
+path = "packages/connector-clickhouse"
+entry_point = { group = "tarel.connectors", name = "clickhouse" }
+host_contract = "connector.v1"
+host_versions = "tarel 0.0.5 (PyPI build of master 5785a00)"
+dependencies = ["clickhouse-connect==1.13.0"]
+native_requirements = ["Optional C extensions inside the clickhouse-connect wheel"]
+license = "MIT (adapter); driver licenses: see the package THIRD_PARTY_NOTICES.md"
+origin = "original Hub adapter"
+install = "install ./packages/connector-clickhouse next to the tested host"
+real_source_evidence = "ClickHouse 25.8.33.6 container fixture, 2026-11-24"
 
 [[extension]]
 id = "connector-mongodb"
@@ -105,7 +156,7 @@ host_contract = "connector.v1"
 host_versions = "local eeb559f"
 dependencies = ["pymongo==4.19.0"]
 native_requirements = ["Provided by separately installed driver wheel"]
-license = "undecided; see LICENSE-PENDING.md"
+license = "MIT (adapter); driver licenses: see the package THIRD_PARTY_NOTICES.md"
 origin = "original Hub adapter"
 install = "install ./packages/connector-mongodb next to the tested host"
 real_source_evidence = "see docs/hub-review.md"

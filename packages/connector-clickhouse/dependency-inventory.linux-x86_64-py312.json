@@ -1,0 +1,92 @@
+{
+  "note": "What one fresh environment resolved. Evidence for review, not legal advice.",
+  "open_findings": [],
+  "platform": "linux-x86_64-py312",
+  "resolved": [
+    {
+      "license": "PSF-2.0",
+      "license_basis": "License-Expression",
+      "license_files": [
+        "backports_zstd-1.8.0.dist-info/licenses/LICENSE.txt",
+        "backports_zstd-1.8.0.dist-info/licenses/LICENSE_zstd.txt"
+      ],
+      "name": "backports.zstd",
+      "native_files": [
+        "backports/zstd/_zstd.cpython-312-x86_64-linux-gnu.so"
+      ],
+      "version": "1.8.0"
+    },
+    {
+      "license": "Mozilla Public License 2.0 (MPL 2.0)",
+      "license_basis": "classifier",
+      "license_files": [
+        "certifi-2026.11.20.dist-info/licenses/LICENSE"
+      ],
+      "name": "certifi",
+      "native_files": [],
+      "version": "2026.11.20"
+    },
+    {
+      "license": "Apache-2.0",
+      "license_basis": "License-Expression",
+      "license_files": [
+        "clickhouse_connect-1.13.0.dist-info/licenses/LICENSE"
+      ],
+      "name": "clickhouse-connect",
+      "native_files": [
+        "clickhouse_connect/driverc/buffer.cpython-312-x86_64-linux-gnu.so",
+        "clickhouse_connect/driverc/dataconv.cpython-312-x86_64-linux-gnu.so",
+        "clickhouse_connect/driverc/npconv.cpython-312-x86_64-linux-gnu.so",
+        "clickhouse_connect/driverc/sqlscan.cpython-312-x86_64-linux-gnu.so"
+      ],
+      "version": "1.13.0"
+    },
+    {
+      "license": "BSD License",
+      "license_basis": "classifier",
+      "license_files": [
+        "lz4-4.4.5.dist-info/licenses/LICENSE"
+      ],
+      "name": "lz4",
+      "native_files": [
+        "lz4/_version.cpython-312-x86_64-linux-gnu.so",
+        "lz4/block/_block.cpython-312-x86_64-linux-gnu.so",
+        "lz4/frame/_frame.cpython-312-x86_64-linux-gnu.so"
+      ],
+      "version": "4.4.5"
+    },
+    {
+      "license": "MIT",
+      "license_basis": "License-Expression",
+      "license_files": [
+        "tarel-0.0.5.dist-info/licenses/LICENSE",
+        "tarel-0.0.5.dist-info/licenses/THIRD_PARTY_NOTICES.md",
+        "tarel/ui/static/CYTOSCAPE_LICENSE.txt"
+      ],
+      "name": "tarel",
+      "native_files": [],
+      "version": "0.0.5"
+    },
+    {
+      "license": "MIT",
+      "license_basis": "License-Expression",
+      "license_files": [
+        "tarel_connector_clickhouse-0.0.1.dist-info/licenses/LICENSE",
+        "tarel_connector_clickhouse-0.0.1.dist-info/licenses/THIRD_PARTY_NOTICES.md"
+      ],
+      "name": "tarel-connector-clickhouse",
+      "native_files": [],
+      "version": "0.0.1"
+    },
+    {
+      "license": "MIT",
+      "license_basis": "License-Expression",
+      "license_files": [
+        "urllib3-2.8.0.dist-info/licenses/LICENSE.txt"
+      ],
+      "name": "urllib3",
+      "native_files": [],
+      "version": "2.8.0"
+    }
+  ]
+}

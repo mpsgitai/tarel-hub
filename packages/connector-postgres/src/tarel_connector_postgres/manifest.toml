@@ -1,0 +1,11 @@
+[connector]
+contract_version = 1
+name = "postgres"
+version = "0.0.1"
+source_type = "postgres"
+entrypoint = "tarel_connector_postgres.connector:create_connector"
+extra = "postgres"
+capabilities = ["probe", "discover_catalog"]
+dependencies = ["psycopg"]
+permissions = ["read"]
+dialect = "postgres"

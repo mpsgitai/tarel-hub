@@ -4,7 +4,8 @@ from collections.abc import Iterator
 from contextlib import contextmanager
 from pathlib import Path
 from typing import Any
-from urllib.parse import unquote, urlsplit
+from urllib.parse import urlsplit
+from urllib.request import url2pathname
 
 from tarel.connectors.contracts import (
     CatalogField,
@@ -45,7 +46,8 @@ def _session(request: ProbeRequest | CatalogRequest) -> Iterator[tuple[Any, str]
             uri = urlsplit(value)
             if uri.netloc or uri.query or uri.fragment:
                 raise ValueError
-            value = unquote(uri.path)
+            # url2pathname maps /C:/data/x.duckdb to a Windows drive path; POSIX paths stay.
+            value = url2pathname(uri.path)
         path = Path(value)
         if not path.is_absolute() or not path.is_file():
             raise ConnectorFailure("invalid_target", "Select an existing absolute DuckDB file.")
