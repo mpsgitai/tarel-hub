@@ -144,7 +144,7 @@ class PostgresConnector:
         relationships = tuple(
             CatalogRelationship(name, s, t, tuple(cols), rs, rt, tuple(ref_cols))
             for kind, name, s, t, rs, rt, cols, ref_cols in constraints
-            if kind == "f" and (rs, rt) in visible
+            if kind == "f" and (s, t) in visible and (rs, rt) in visible
         )
         return CatalogResult(
             "postgres", "postgres", database, "postgres", catalog_objects, relationships

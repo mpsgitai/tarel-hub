@@ -73,6 +73,13 @@ def _session(request: ProbeRequest | CatalogRequest) -> Iterator[tuple[Any, str]
         code = exc.args[0] if exc.args else None
         kind = "authentication_failed" if code in _AUTHENTICATION_CODES else "connection_failed"
         raise ConnectorFailure(kind, "MySQL connection or login failed.") from None
+    except RuntimeError:
+        # PyMySQL needs cryptography only for SHA-2 password login over a connection without TLS.
+        raise ConnectorFailure(
+            "missing_dependency",
+            "MySQL SHA-2 login without TLS needs the cryptography package; "
+            "enable TLS on the server or install cryptography.",
+        ) from None
     try:
         with conn.cursor() as cursor:
             cursor.execute("START TRANSACTION READ ONLY")

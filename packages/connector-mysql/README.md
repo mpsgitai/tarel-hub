@@ -12,5 +12,9 @@ tarel connector check mysql
 
 Die Konfiguration verwendet die Sektion `[mysql]` und den Schlüssel `url` oder die Variable
 `TAREL_MYSQL_URL`, z. B. `mysql://reader:PASSWORD@db.example:3306/dwh`. In MySQL ist Schema und
-Datenbank dasselbe: `--database` wählt das Schema, `--namespace` muss dazu passen. Die Verbindung ist
-unverschlüsselt; TLS ist noch nicht konfigurierbar.
+Datenbank dasselbe: `--database` wählt das Schema, `--namespace` muss dazu passen.
+
+PyMySQL verschlüsselt die Verbindung, wenn der Server TLS anbietet (MySQL 8 tut das standardmäßig),
+prüft das Zertifikat aber nicht; TLS erzwingen oder prüfen ist noch nicht konfigurierbar. Ohne TLS
+braucht die SHA-2-Anmeldung (`caching_sha2_password`) das Paket `cryptography`; fehlt es, meldet
+der Connector `missing_dependency`.

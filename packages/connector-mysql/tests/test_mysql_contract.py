@@ -32,6 +32,20 @@ def test_refused_connection_hides_target_details():
     assert "s3cr3t" not in str(error.value) and "127.0.0.1" not in str(error.value)
 
 
+def test_sha2_login_without_tls_reports_the_missing_package(monkeypatch):
+    adapter = _adapter()
+    import pymysql
+
+    def refuse(**_kwargs):
+        raise RuntimeError("'cryptography' package is required for sha256_password")
+
+    monkeypatch.setattr(pymysql, "connect", refuse)
+    with pytest.raises(ConnectorFailure) as error:
+        adapter.probe(ProbeRequest("mysql://someone:s3cr3t@db.example.test/demo"))
+    assert error.value.code == "missing_dependency"
+    assert "s3cr3t" not in str(error.value)
+
+
 @pytest.mark.parametrize("variable", ["HUB_TEST_MYSQL_URL", "HUB_TEST_MARIADB_URL"])
 def test_real_fixture_catalog(variable):
     url = os.environ.get(variable)

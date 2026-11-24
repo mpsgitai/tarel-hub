@@ -25,7 +25,9 @@ SELECT name, engine IN ('View', 'MaterializedView'), nullIf(comment, '')
 FROM system.tables WHERE database = {db:String} AND NOT is_temporary ORDER BY name
 """
 _COLUMNS = """
-SELECT table, name, position, type, startsWith(type, 'Nullable('), nullIf(comment, '')
+SELECT table, name, position, type,
+  startsWith(type, 'Nullable(') OR startsWith(type, 'LowCardinality(Nullable('),
+  nullIf(comment, '')
 FROM system.columns WHERE database = {db:String} ORDER BY table, position
 """
 _AUTHENTICATION_CODES = {"516", "192"}

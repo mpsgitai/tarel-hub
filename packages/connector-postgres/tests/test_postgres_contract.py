@@ -45,8 +45,13 @@ def test_real_fixture_catalog():
     assert objects["order_lines"].primary_key == ("line_no", "order_id")
     assert objects["order_lines"].fields[2].data_type == "numeric(12,2)"
     assert objects["order_totals"].kind == "view"
+    # The partition's cloned key is dropped with the partition; only the parent's key remains.
+    assert sorted((item.from_object, item.name) for item in catalog.relationships) == [
+        ("events", "events_customer_id_fkey"),
+        ("order_lines", "order_lines_order_fk"),
+        ("orders", "orders_customer_id_fkey"),
+    ]
     relationships = {item.name: item for item in catalog.relationships}
-    assert sorted(relationships) == ["order_lines_order_fk", "orders_customer_id_fkey"]
     line_fk = relationships["order_lines_order_fk"]
     assert (line_fk.from_fields, line_fk.to_object, line_fk.to_fields) == (
         ("order_id",),

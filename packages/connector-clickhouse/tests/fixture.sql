@@ -3,7 +3,8 @@ DROP DATABASE IF EXISTS hubtest;
 DROP USER IF EXISTS hubtest_reader;
 CREATE DATABASE hubtest;
 CREATE TABLE hubtest.orders (
-  id UInt32 COMMENT 'Order number', customer_id Nullable(UInt32), amount Decimal(12, 2)
+  id UInt32 COMMENT 'Order number', customer_id Nullable(UInt32), amount Decimal(12, 2),
+  channel LowCardinality(Nullable(String))
 ) ENGINE = MergeTree ORDER BY id COMMENT 'Synthetic orders';
 CREATE VIEW hubtest.order_totals AS SELECT customer_id, sum(amount) AS total FROM hubtest.orders GROUP BY customer_id;
 CREATE TABLE hubtest.payroll (id UInt32) ENGINE = MergeTree ORDER BY id;

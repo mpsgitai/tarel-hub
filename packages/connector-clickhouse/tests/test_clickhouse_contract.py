@@ -50,6 +50,7 @@ def test_real_fixture_catalog():
         ("id", "UInt32", False, "Order number"),
         ("customer_id", "Nullable(UInt32)", True, None),
         ("amount", "Decimal(12, 2)", False, None),
+        ("channel", "LowCardinality(Nullable(String))", True, None),
     ]
     assert objects["order_totals"].kind == "view"
     with pytest.raises(ConnectorFailure) as error:
