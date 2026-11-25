@@ -1,0 +1,1 @@
+Host: tarel>=0.0.5,<0.1 (MIT). Parser dependency: sqlglot>=30.19,<30.20 (MIT), https://pypi.org/project/sqlglot/. Installed separately from the configured package index. SQLGlot code is not bundled or redistributed in this package.

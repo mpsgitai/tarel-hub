@@ -55,26 +55,36 @@ real_source_evidence = "not started"
 [[extension]]
 id = "lineage-sqlglot"
 capabilities = ["lineage-analysis"]
-status = "planned"
-host_contract = "none yet: the host has no entry point for analyzers; see docs/host-proposals/0003-missing-extension-points.md"
+status = "experimental"
+package = "tarel-lineage-sqlglot"
+import_name = "tarel_lineage_sqlglot"
+path = "packages/lineage-sqlglot"
+entry_point = { group = "tarel.lineage_analyzers", name = "sqlglot" }
+host_contract = "lineage_analyzer.v1"
+host_versions = "tarel>=0.0.5,<0.1"
 dependencies = ["sqlglot>=30.19,<30.20"]
 native_requirements = []
-license = "undecided"
-origin = "today in the host as tarel.lineage.sqlglot_adapter, installed by tarel[sql-lineage]"
-install = "not available from the hub; the host extra keeps working"
-real_source_evidence = "not started"
+license = "MIT (adapter); parser license: see the package THIRD_PARTY_NOTICES.md"
+origin = "migrated from TAREL host to Hub"
+install = "install ./packages/lineage-sqlglot next to the tested host"
+real_source_evidence = "migrated SQLGlot static lineage suite against host entry point"
 
 [[extension]]
 id = "retrieval-llamacpp"
 capabilities = ["embeddings", "reranking"]
-status = "planned"
-host_contract = "none yet: the host has no entry point for retrieval; see docs/host-proposals/0003-missing-extension-points.md"
+status = "experimental"
+package = "tarel-retrieval-llamacpp"
+import_name = "tarel_retrieval_llamacpp"
+path = "packages/retrieval-llamacpp"
+entry_point = { group = "tarel.embeddings", name = "llamacpp" }
+host_contract = "retrieval_plugin.v1"
+host_versions = "tarel>=0.0.5,<0.1"
 dependencies = ["llama-cpp-python>=0.3.16,<0.4"]
-native_requirements = ["llama.cpp inside llama-cpp-python", "GGUF model files fetched separately"]
-license = "undecided"
-origin = "today in the host as tarel.retrieval.local and rerank, installed by tarel[local-rag]"
-install = "not available from the hub; the host extra keeps working"
-real_source_evidence = "not started"
+native_requirements = ["llama.cpp inside llama-cpp-python", "GGUF model files fetched separately via pinned HTTPS + SHA-256"]
+license = "MIT (adapter); runtime and model licenses: see the package THIRD_PARTY_NOTICES.md"
+origin = "migrated from TAREL host to Hub"
+install = "install ./packages/retrieval-llamacpp next to the tested host"
+real_source_evidence = "entry-point plugin contract tests against host"
 
 [[extension]]
 id = "connector-duckdb"

@@ -1,0 +1,17 @@
+[[dependency]]
+name = "tarel"
+requirement = "tarel>=0.0.5,<0.1"
+spdx = "MIT"
+source = "https://github.com/mpsgitai/tarel"
+verified_version = "0.0.5"
+verified_on = "2026-11-25"
+evidence = "license field and LICENSE in the host repository"
+
+[[dependency]]
+name = "llama-cpp-python"
+requirement = "llama-cpp-python>=0.3.16,<0.4"
+spdx = "MIT"
+source = "https://pypi.org/project/llama-cpp-python/"
+verified_version = "0.3.16"
+verified_on = "2026-11-25"
+evidence = "PyPI package metadata and upstream LICENSE.md (MIT)"

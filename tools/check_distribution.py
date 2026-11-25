@@ -191,13 +191,24 @@ def _check_wheel(members: list[Member]) -> list[str]:
 
 
 def _check_manifests(names: dict[str, Member]) -> Iterator[str]:
-    """An entry point must lead to a manifest the host can read, with the same value."""
+    """A connector entry point must lead to a manifest the host can read, with the same value."""
     entry_points = next((m for p, m in names.items() if p.endswith("entry_points.txt")), None)
     if entry_points is None:
         return
-    for line in entry_points.data.decode("utf-8").splitlines():
+    section = ""
+    for raw_line in entry_points.data.decode("utf-8").splitlines():
+        line = raw_line.strip()
+        if not line:
+            continue
+        if line.startswith("[") and line.endswith("]"):
+            section = line[1:-1].strip()
+            continue
         name, separator, value = line.partition("=")
         if not separator:
+            continue
+        if section and section != "tarel.connectors":
+            if ":" not in value:
+                yield f"entry point {name.strip()} in [{section}] must use module:callable"
             continue
         module = value.strip().split(":")[0].split(".")[0]
         manifest = names.get(f"{module}/manifest.toml")
