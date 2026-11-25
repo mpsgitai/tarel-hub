@@ -124,7 +124,7 @@ def analyze_with_sqlglot(
     workfile_writes: list[dict[str, object]] = []
     excluded: list[dict[str, object]] = []
     for write in writes:
-        sources = _write_sources(write, local_sources, exp)
+        sources = _write_sources(write, local_sources, exp, resolved)
         if sources is None:
             return _unsupported(sqlglot.__version__, resolved, "sqlglot_unresolved_source")
         if _is_local(write.target):
@@ -302,6 +302,8 @@ def _target_table(expression: Any, operation: str, exp: Any) -> Any | None:
         }
         if raw.name.casefold() in cte_names:
             return None
+    if operation not in {"update", "delete"}:
+        return raw
     alias = raw.alias_or_name.casefold()
     matches = [
         table
@@ -317,9 +319,10 @@ def _write_sources(
     write: _Write,
     local_sources: dict[str, tuple[_Source, ...]],
     exp: Any,
+    dialect: str = "",
 ) -> tuple[_Source, ...] | None:
     sources: list[_Source] = []
-    for table in _reachable_tables(write.expression, exp):
+    for table in _reachable_tables(write.expression, exp, dialect):
         if _is_write_target_table(write, table, exp):
             continue
         target = _table_name(table)
@@ -342,10 +345,19 @@ def _write_sources(
     return _merge_sources(tuple(sources))
 
 
-def _reachable_tables(expression: Any, exp: Any) -> tuple[Any, ...]:
+def _cte_identifier_key(identifier: Any, dialect: str) -> str:
+    name = getattr(identifier, "name", "")
+    if not name:
+        return ""
+    if dialect == "postgres":
+        return name if getattr(identifier, "quoted", False) else name.lower()
+    return name.casefold()
+
+
+def _reachable_tables(expression: Any, exp: Any, dialect: str = "") -> tuple[Any, ...]:
     tables: list[Any] = []
 
-    def visit(node: Any, ctes: dict[str, Any], expanding: frozenset[str]) -> None:
+    def visit(node: Any, ctes: dict[str, Any], expanding: frozenset[int]) -> None:
         if isinstance(node, exp.CTE):
             return
         with_clause = node.args.get("with_") if hasattr(node, "args") else None
@@ -353,8 +365,14 @@ def _reachable_tables(expression: Any, exp: Any) -> tuple[Any, ...]:
             local_ctes = dict(ctes)
             is_recursive = bool(with_clause.args.get("recursive"))
             for cte in getattr(with_clause, "expressions", ()):
-                if cte.alias_or_name:
-                    cte_key = cte.alias_or_name.casefold()
+                alias_node = cte.args.get("alias")
+                alias_ident = alias_node.this if alias_node is not None else None
+                cte_key = (
+                    _cte_identifier_key(alias_ident, dialect)
+                    if alias_ident is not None
+                    else (cte.alias_or_name.casefold() if cte.alias_or_name else "")
+                )
+                if cte_key:
                     if is_recursive:
                         scope_ref: dict[str, Any] = dict(local_ctes)
                         entry = (cte, scope_ref)
@@ -364,13 +382,12 @@ def _reachable_tables(expression: Any, exp: Any) -> tuple[Any, ...]:
                         local_ctes[cte_key] = (cte, dict(local_ctes))
             ctes = local_ctes
         if isinstance(node, exp.Table):
-            target = _table_name(node)
-            key = target.casefold()
-            entry = ctes.get(key) if not _is_qualified(node) else None
+            key = _cte_identifier_key(node.this, dialect) if not _is_qualified(node) else ""
+            entry = ctes.get(key) if key else None
             if entry is not None:
                 cte, cte_scope = entry
-                if key not in expanding:
-                    visit(cte.this, cte_scope, expanding | {key})
+                if id(cte) not in expanding:
+                    visit(cte.this, cte_scope, expanding | {id(cte)})
             else:
                 tables.append(node)
             for child in node.iter_expressions():

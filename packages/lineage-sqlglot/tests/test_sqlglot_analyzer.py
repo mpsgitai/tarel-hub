@@ -113,3 +113,37 @@ def test_case_distinct_postgres_sources_are_preserved() -> None:
     assert result.analysis is not None
     sources = {item["target"] for item in result.analysis["writes"][0]["sources"]}
     assert sources == {"raw.Orders", "raw.orders"}
+
+
+def test_insert_target_is_not_replaced_by_select_alias() -> None:
+    sql = "INSERT INTO dst SELECT * FROM src AS dst;"
+    result = analyze_with_sqlglot(_definition("postgres", sql))
+    assert result.complete is True
+    assert result.analysis is not None
+    write = result.analysis["writes"][0]
+    assert write["target"] == "dst"
+    assert {item["target"] for item in write["sources"]} == {"src"}
+
+
+def test_shadowed_inner_cte_is_not_skipped_as_cycle() -> None:
+    sql = (
+        "WITH c AS (WITH c AS (SELECT * FROM seed) SELECT * FROM c)\n"
+        "INSERT INTO dst SELECT * FROM c;"
+    )
+    result = analyze_with_sqlglot(_definition("postgres", sql))
+    assert result.complete is True
+    assert result.analysis is not None
+    sources = {item["target"] for item in result.analysis["writes"][0]["sources"]}
+    assert sources == {"seed"}
+
+
+def test_quoted_postgres_cte_does_not_match_unquoted_table() -> None:
+    sql = (
+        'WITH "Orders" AS (SELECT * FROM archived)\n'
+        "INSERT INTO dst SELECT * FROM orders;"
+    )
+    result = analyze_with_sqlglot(_definition("postgres", sql))
+    assert result.complete is True
+    assert result.analysis is not None
+    sources = {item["target"] for item in result.analysis["writes"][0]["sources"]}
+    assert sources == {"orders"}
