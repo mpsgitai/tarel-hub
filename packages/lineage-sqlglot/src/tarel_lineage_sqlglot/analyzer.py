@@ -308,7 +308,7 @@ def _target_table(expression: Any, operation: str, exp: Any) -> Any | None:
         for table in expression.find_all(exp.Table)
         if table is not raw
         and table.alias_or_name.casefold() == alias
-        and (_is_qualified(table) or _is_local(_table_name(table)))
+        and (_is_qualified(table) or _is_local(_table_name(table)) or bool(table.alias))
     ]
     return matches[0] if len(matches) == 1 else raw
 
@@ -351,9 +351,17 @@ def _reachable_tables(expression: Any, exp: Any) -> tuple[Any, ...]:
         with_clause = node.args.get("with_") if hasattr(node, "args") else None
         if with_clause is not None:
             local_ctes = dict(ctes)
+            is_recursive = bool(with_clause.args.get("recursive"))
             for cte in getattr(with_clause, "expressions", ()):
                 if cte.alias_or_name:
-                    local_ctes[cte.alias_or_name.casefold()] = (cte, dict(local_ctes))
+                    cte_key = cte.alias_or_name.casefold()
+                    if is_recursive:
+                        scope_ref: dict[str, Any] = dict(local_ctes)
+                        entry = (cte, scope_ref)
+                        scope_ref[cte_key] = entry
+                        local_ctes[cte_key] = entry
+                    else:
+                        local_ctes[cte_key] = (cte, dict(local_ctes))
             ctes = local_ctes
         if isinstance(node, exp.Table):
             target = _table_name(node)
@@ -503,10 +511,11 @@ def _source_payload(source: _Source) -> dict[str, object]:
 def _merge_sources(sources: tuple[_Source, ...]) -> tuple[_Source, ...]:
     unique: dict[tuple[str, tuple[str, ...]], _Source] = {}
     for source in sources:
-        unique.setdefault((source.target.casefold(), source.via), source)
+        unique.setdefault((source.target, source.via), source)
     return tuple(
         sorted(
-            unique.values(), key=lambda item: (item.target.casefold(), item.via, item.line_start)
+            unique.values(),
+            key=lambda item: (item.target.casefold(), item.target, item.via, item.line_start),
         )
     )
 

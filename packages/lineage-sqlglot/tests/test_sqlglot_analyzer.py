@@ -82,3 +82,34 @@ def test_writable_cte_target_returns_unsupported() -> None:
     sql = "WITH c AS (SELECT * FROM dbo.RealTarget) UPDATE c SET value = 1;"
     result = analyze_with_sqlglot(_definition("tsql", sql))
     assert result.complete is False
+
+
+def test_unqualified_physical_write_alias_resolves_target() -> None:
+    sql = "UPDATE t SET value = 1 FROM RealTarget AS t;"
+    result = analyze_with_sqlglot(_definition("tsql", sql))
+    assert result.complete is True
+    assert result.analysis is not None
+    assert result.analysis["writes"][0]["target"] == "RealTarget"
+
+
+def test_recursive_cte_does_not_emit_self_as_physical_source() -> None:
+    sql = (
+        "WITH RECURSIVE c(id) AS (\n"
+        "SELECT id FROM seed UNION ALL SELECT id + 1 FROM c WHERE id < 10\n"
+        ")\n"
+        "INSERT INTO dst SELECT id FROM c;"
+    )
+    result = analyze_with_sqlglot(_definition("postgres", sql))
+    assert result.complete is True
+    assert result.analysis is not None
+    sources = {item["target"] for item in result.analysis["writes"][0]["sources"]}
+    assert sources == {"seed"}
+
+
+def test_case_distinct_postgres_sources_are_preserved() -> None:
+    sql = 'INSERT INTO dst SELECT * FROM raw."Orders" UNION ALL SELECT * FROM raw.orders;'
+    result = analyze_with_sqlglot(_definition("postgres", sql))
+    assert result.complete is True
+    assert result.analysis is not None
+    sources = {item["target"] for item in result.analysis["writes"][0]["sources"]}
+    assert sources == {"raw.Orders", "raw.orders"}
