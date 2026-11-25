@@ -258,7 +258,8 @@ def _match_writes(
         )
     if remaining:
         return None
-    return tuple(sorted(matched, key=lambda item: (item.marker.line, item.operation)))
+    # Timsort is stable, so ties on the same line preserve original statement order.
+    return tuple(sorted(matched, key=lambda item: item.marker.line))
 
 
 def _operation(expression: Any, exp: Any) -> str:
@@ -292,6 +293,15 @@ def _target_table(expression: Any, operation: str, exp: Any) -> Any | None:
         return None
     if _is_qualified(raw) or _is_local(_table_name(raw)):
         return raw
+    with_clause = expression.args.get("with_")
+    if with_clause is not None:
+        cte_names = {
+            cte.alias_or_name.casefold()
+            for cte in getattr(with_clause, "expressions", ())
+            if cte.alias_or_name
+        }
+        if raw.name.casefold() in cte_names:
+            return None
     alias = raw.alias_or_name.casefold()
     matches = [
         table
@@ -333,34 +343,37 @@ def _write_sources(
 
 
 def _reachable_tables(expression: Any, exp: Any) -> tuple[Any, ...]:
-    ctes = {
-        cte.alias_or_name.casefold(): cte
-        for cte in expression.find_all(exp.CTE)
-        if cte.alias_or_name
-    }
-    expanded_ctes: set[str] = set()
     tables: list[Any] = []
 
-    def visit(node: Any) -> None:
+    def visit(node: Any, ctes: dict[str, Any], expanding: frozenset[str]) -> None:
         if isinstance(node, exp.CTE):
             return
+        with_clause = node.args.get("with_") if hasattr(node, "args") else None
+        if with_clause is not None:
+            local_ctes = dict(ctes)
+            for cte in getattr(with_clause, "expressions", ()):
+                if cte.alias_or_name:
+                    local_ctes[cte.alias_or_name.casefold()] = (cte, dict(local_ctes))
+            ctes = local_ctes
         if isinstance(node, exp.Table):
             target = _table_name(node)
             key = target.casefold()
-            cte = ctes.get(key) if not _is_qualified(node) else None
-            if cte is not None:
-                if key not in expanded_ctes:
-                    expanded_ctes.add(key)
-                    visit(cte.this)
+            entry = ctes.get(key) if not _is_qualified(node) else None
+            if entry is not None:
+                cte, cte_scope = entry
+                if key not in expanding:
+                    visit(cte.this, cte_scope, expanding | {key})
             else:
                 tables.append(node)
             for child in node.iter_expressions():
-                visit(child)
+                visit(child, ctes, expanding)
             return
         for child in node.iter_expressions():
-            visit(child)
+            if child is with_clause:
+                continue
+            visit(child, ctes, expanding)
 
-    visit(expression)
+    visit(expression, {}, frozenset())
     return tuple(tables)
 
 
