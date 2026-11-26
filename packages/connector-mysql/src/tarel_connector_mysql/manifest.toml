@@ -1,0 +1,11 @@
+[connector]
+contract_version = 1
+name = "mysql"
+version = "0.0.1"
+source_type = "mysql"
+entrypoint = "tarel_connector_mysql.connector:create_connector"
+extra = "mysql"
+capabilities = ["probe", "discover_catalog"]
+dependencies = ["pymysql"]
+permissions = ["read"]
+dialect = "mysql"

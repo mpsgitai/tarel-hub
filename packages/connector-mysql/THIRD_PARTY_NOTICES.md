@@ -1,0 +1,1 @@
+Host: tarel>=0.0.3,<0.1 (MIT). Driver: PyMySQL==1.2.4 (MIT), https://pypi.org/project/PyMySQL/1.2.4/. Installed separately from the configured index and only imported. Neither driver code nor database servers are distributed in this package. See dependency-inventory.*.json in the repository for this platform.

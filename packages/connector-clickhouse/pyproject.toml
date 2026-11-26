@@ -1,0 +1,45 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "tarel-connector-clickhouse"
+version = "0.0.1"
+description = "Read-only ClickHouse metadata connector for TAREL."
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [{ name = "MPS" }]
+license = "MIT"
+license-files = ["LICENSE", "THIRD_PARTY_NOTICES.md"]
+classifiers = [
+  "Development Status :: 2 - Pre-Alpha",
+  "Private :: Do Not Upload",
+  "Programming Language :: Python :: 3",
+  "Topic :: Database",
+]
+dependencies = [
+  "tarel>=0.0.3,<0.1",
+  "clickhouse-connect==1.13.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/mpsgitai/tarel-hub"
+Repository = "https://github.com/mpsgitai/tarel-hub"
+Issues = "https://github.com/mpsgitai/tarel-hub/issues"
+
+[project.entry-points."tarel.connectors"]
+clickhouse = "tarel_connector_clickhouse.connector:create_connector"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/tarel_connector_clickhouse"]
+
+[tool.hatch.build.targets.sdist]
+only-include = [
+  "LICENSE",
+  "README.md",
+  "THIRD_PARTY_NOTICES.md",
+  "licenses.toml",
+  "pyproject.toml",
+  "src",
+  "tests",
+]

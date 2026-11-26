@@ -1,0 +1,17 @@
+[[dependency]]
+name = "tarel"
+requirement = "tarel>=0.0.3,<0.1"
+spdx = "MIT"
+source = "https://github.com/mpsgitai/tarel"
+verified_version = "0.0.5"
+verified_on = "2026-11-24"
+evidence = "license field and LICENSE in the published tarel 0.0.5 wheel"
+
+[[dependency]]
+name = "PyMySQL"
+requirement = "PyMySQL==1.2.4"
+spdx = "MIT"
+source = "https://pypi.org/project/PyMySQL/1.2.4/"
+verified_version = "1.2.4"
+verified_on = "2026-11-24"
+evidence = "License-Expression in the published wheel metadata; pure Python, no native files"

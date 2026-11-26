@@ -1,0 +1,77 @@
+{
+  "note": "What one fresh environment resolved. Evidence for review, not legal advice.",
+  "open_findings": [],
+  "platform": "linux-x86_64-py312",
+  "resolved": [
+    {
+      "license": "LGPL-3.0-only",
+      "license_basis": "License-Expression",
+      "license_files": [
+        "psycopg-3.3.9.dist-info/licenses/LICENSE.txt"
+      ],
+      "name": "psycopg",
+      "native_files": [],
+      "version": "3.3.9"
+    },
+    {
+      "license": "LGPL-3.0-only",
+      "license_basis": "License-Expression",
+      "license_files": [
+        "psycopg_binary-3.3.9.dist-info/licenses/LICENSE.txt"
+      ],
+      "name": "psycopg-binary",
+      "native_files": [
+        "psycopg_binary.libs/libcom_err-2abe824b.so.2.1",
+        "psycopg_binary.libs/libcom_err-55c5739a.so.3.0",
+        "psycopg_binary.libs/libcrypt-bc2db45e.so.1",
+        "psycopg_binary.libs/libcrypto-3a0647ea.so.3",
+        "psycopg_binary.libs/libgssapi_krb5-923083ce.so.2.2",
+        "psycopg_binary.libs/libk5crypto-459efceb.so.3.1",
+        "psycopg_binary.libs/libkeyutils-dfe70bd6.so.1.5",
+        "psycopg_binary.libs/libkrb5-f18b4d11.so.3.3",
+        "psycopg_binary.libs/libkrb5support-93fbab13.so.0.1",
+        "psycopg_binary.libs/liblber-7b3e3cc5.so.2.0.200",
+        "psycopg_binary.libs/libldap-fb847fea.so.2.0.200",
+        "psycopg_binary.libs/libpq-e9b5c9ac.so.5.18",
+        "psycopg_binary.libs/libsasl2-84219a89.so.3.0.0",
+        "psycopg_binary.libs/libssl-6a9b88ec.so.3",
+        "psycopg_binary/_psycopg.cpython-312-x86_64-linux-gnu.so",
+        "psycopg_binary/pq.cpython-312-x86_64-linux-gnu.so"
+      ],
+      "version": "3.3.9"
+    },
+    {
+      "license": "MIT",
+      "license_basis": "License-Expression",
+      "license_files": [
+        "tarel-0.0.5.dist-info/licenses/LICENSE",
+        "tarel-0.0.5.dist-info/licenses/THIRD_PARTY_NOTICES.md",
+        "tarel/ui/static/CYTOSCAPE_LICENSE.txt"
+      ],
+      "name": "tarel",
+      "native_files": [],
+      "version": "0.0.5"
+    },
+    {
+      "license": "MIT",
+      "license_basis": "License-Expression",
+      "license_files": [
+        "tarel_connector_postgres-0.0.1.dist-info/licenses/LICENSE",
+        "tarel_connector_postgres-0.0.1.dist-info/licenses/THIRD_PARTY_NOTICES.md"
+      ],
+      "name": "tarel-connector-postgres",
+      "native_files": [],
+      "version": "0.0.1"
+    },
+    {
+      "license": "PSF-2.0",
+      "license_basis": "License-Expression",
+      "license_files": [
+        "typing_extensions-4.16.0.dist-info/licenses/LICENSE"
+      ],
+      "name": "typing_extensions",
+      "native_files": [],
+      "version": "4.16.0"
+    }
+  ]
+}

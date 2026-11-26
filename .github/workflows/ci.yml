@@ -1,0 +1,64 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    name: Validate catalog, licenses, rules, and wheels
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Set up Python 3.12
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.12"
+      - name: Install tooling and public TAREL host
+        run: |
+          python -m pip install -r requirements-dev.txt build
+          python -m pip install "tarel>=0.0.6,<0.1" || python -m pip install "git+https://github.com/mpsgitai/tarel.git@master"
+      - name: Lint
+        run: ruff check .
+      - name: Validate catalog and licenses
+        run: |
+          python tools/catalog.py validate
+          python tools/check_licenses.py
+      - name: Run contract tests
+        run: pytest contract-tests/ -q
+      - name: Build and inspect all package distributions
+        run: |
+          mkdir -p dist-check
+          for pkg in packages/*; do
+            python -m build "$pkg" --outdir dist-check
+          done
+          python tools/check_distribution.py dist-check
+      - name: Run unit tests for pure/mockable packages
+        run: |
+          python -m pip install --no-deps packages/connector-postgres packages/connector-mysql packages/connector-clickhouse packages/connector-oracle packages/connector-duckdb packages/connector-mongodb packages/retrieval-llamacpp
+          python -m pip install packages/lineage-sqlglot
+          pytest packages/lineage-sqlglot/tests packages/retrieval-llamacpp/tests packages/connector-postgres/tests/test_postgres_contract.py -q
+
+  secrets:
+    name: Secret scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out complete history
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+      - name: Scan with Gitleaks
+        uses: gitleaks/gitleaks-action@e0c47f4f8be36e29cdc102c57e68cb5cbf0e8d1e # v3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITLEAKS_ENABLE_COMMENTS: "false"
+          GITLEAKS_ENABLE_UPLOAD_ARTIFACT: "false"

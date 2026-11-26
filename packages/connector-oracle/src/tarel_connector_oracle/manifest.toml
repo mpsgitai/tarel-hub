@@ -1,0 +1,12 @@
+[connector]
+contract_version = 1
+name = "oracle"
+version = "0.0.1"
+source_type = "oracle"
+entrypoint = "tarel_connector_oracle.connector:create_connector"
+extra = "oracle"
+capabilities = ["probe", "discover_catalog"]
+dependencies = ["oracledb"]
+permissions = ["read"]
+dialect = "oracle"
+references = ["references/authoring.md", "references/dialect.md"]

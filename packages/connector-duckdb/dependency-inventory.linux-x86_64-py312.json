@@ -1,0 +1,45 @@
+{
+  "note": "What one fresh environment resolved. Evidence for review, not legal advice.",
+  "open_findings": [
+    "tarel-connector-duckdb"
+  ],
+  "platform": "linux-x86_64-py312",
+  "resolved": [
+    {
+      "license": "MIT License",
+      "license_basis": "classifier",
+      "license_files": [
+        "duckdb-2.0.0.dist-info/licenses/LICENSE",
+        "duckdb/experimental/spark/LICENSE"
+      ],
+      "name": "duckdb",
+      "native_files": [
+        "_duckdb.abi3.so"
+      ],
+      "version": "2.0.0"
+    },
+    {
+      "license": "MIT",
+      "license_basis": "License-Expression",
+      "license_files": [
+        "tarel-0.0.3.dist-info/licenses/LICENSE",
+        "tarel-0.0.3.dist-info/licenses/THIRD_PARTY_NOTICES.md",
+        "tarel/ui/static/CYTOSCAPE_LICENSE.txt"
+      ],
+      "name": "tarel",
+      "native_files": [],
+      "version": "0.0.3"
+    },
+    {
+      "license": null,
+      "license_basis": null,
+      "license_files": [
+        "tarel_connector_duckdb-0.0.1.dist-info/licenses/LICENSE-PENDING.md",
+        "tarel_connector_duckdb-0.0.1.dist-info/licenses/THIRD_PARTY_NOTICES.md"
+      ],
+      "name": "tarel-connector-duckdb",
+      "native_files": [],
+      "version": "0.0.1"
+    }
+  ]
+}

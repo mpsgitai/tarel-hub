@@ -1,0 +1,174 @@
+# Extension catalog for TAREL. Reading this file imports no plugin and authorizes neither
+# installation nor activation. Status reflects verified evidence, never aspirations.
+#
+# status: builtin       ships inside the TAREL host; no hub package
+#         experimental  installable into an unchanged host; review notes before production use
+#         planned       not built yet
+contract_version = 1
+
+[[extension]]
+id = "connector-oracle"
+capabilities = ["connector"]
+status = "experimental"
+package = "tarel-connector-oracle"
+import_name = "tarel_connector_oracle"
+path = "packages/connector-oracle"
+entry_point = { group = "tarel.connectors", name = "oracle" }
+host_contract = "connector.v1"
+host_versions = "tarel>=0.0.3,<0.1"
+dependencies = ["oracledb>=26.1,<27"]
+native_requirements = []
+license = "MIT (adapter); driver license: see package THIRD_PARTY_NOTICES.md"
+origin = "written in this repository"
+install = "uv pip install \"git+https://github.com/mpsgitai/tarel-hub.git#subdirectory=packages/connector-oracle\""
+real_source_evidence = "Oracle Database 23ai Free (23.26.4) container fixture; URL auth only; revoked SELECT privileges appear as absent objects (not confirmed source deletions)"
+
+[[extension]]
+id = "connector-sqlserver"
+capabilities = ["connector"]
+status = "builtin"
+package = "tarel"
+import_name = "tarel.connectors.sqlserver"
+entry_point = { group = "built into the host", name = "sqlserver" }
+host_contract = "connector.v1"
+host_versions = "part of the host"
+dependencies = ["pymssql>=2.3,<3"]
+native_requirements = ["FreeTDS, OpenSSL and Kerberos are bundled inside the pymssql wheel"]
+license = "host MIT; pymssql LGPL-2.1; see docs/inventory.md"
+origin = "TAREL host"
+install = "pip install 'tarel[sqlserver]'"
+real_source_evidence = "SQL Server 2025 (17.0.1000.7) on Windows: SQL login and Windows integrated auth (tarel>=0.0.6)"
+
+[[extension]]
+id = "importer-documents"
+capabilities = ["importer"]
+status = "planned"
+host_contract = "existing knowledge use cases; no plugin group"
+dependencies = []
+native_requirements = []
+license = "MIT (planned)"
+origin = "planned for this repository"
+install = "not available"
+real_source_evidence = "not started"
+
+[[extension]]
+id = "lineage-sqlglot"
+capabilities = ["lineage-analysis"]
+status = "experimental"
+package = "tarel-lineage-sqlglot"
+import_name = "tarel_lineage_sqlglot"
+path = "packages/lineage-sqlglot"
+entry_point = { group = "tarel.lineage_analyzers", name = "sqlglot" }
+host_contract = "lineage_analyzer.v1"
+host_versions = "tarel>=0.0.6,<0.1"
+dependencies = ["sqlglot>=30.19,<30.20"]
+native_requirements = []
+license = "MIT (adapter); parser license: see package THIRD_PARTY_NOTICES.md"
+origin = "migrated from TAREL host to Hub"
+install = "uv pip install \"git+https://github.com/mpsgitai/tarel-hub.git#subdirectory=packages/lineage-sqlglot\""
+real_source_evidence = "SQLGlot 30.19.0 static lineage suite against host entry point"
+
+[[extension]]
+id = "retrieval-llamacpp"
+capabilities = ["embeddings", "reranking"]
+status = "experimental"
+package = "tarel-retrieval-llamacpp"
+import_name = "tarel_retrieval_llamacpp"
+path = "packages/retrieval-llamacpp"
+entry_points = [
+  { group = "tarel.embeddings", name = "llamacpp" },
+  { group = "tarel.rerankers", name = "llamacpp" },
+]
+host_contract = "retrieval_plugin.v1"
+host_versions = "tarel>=0.0.6,<0.1"
+dependencies = ["llama-cpp-python>=0.3.16,<0.4"]
+native_requirements = ["llama.cpp inside llama-cpp-python", "GGUF model files fetched separately via pinned HTTPS + SHA-256"]
+license = "MIT (adapter); runtime (MIT) and Qwen3 model (Apache-2.0) links: see package THIRD_PARTY_NOTICES.md"
+origin = "migrated from TAREL host to Hub"
+install = "uv pip install \"git+https://github.com/mpsgitai/tarel-hub.git#subdirectory=packages/retrieval-llamacpp\""
+real_source_evidence = "entry-point plugin contract tests against host"
+
+[[extension]]
+id = "connector-duckdb"
+capabilities = ["connector"]
+status = "experimental"
+package = "tarel-connector-duckdb"
+import_name = "tarel_connector_duckdb"
+path = "packages/connector-duckdb"
+entry_point = { group = "tarel.connectors", name = "duckdb" }
+host_contract = "connector.v1"
+host_versions = "tarel>=0.0.3,<0.1"
+dependencies = ["duckdb==2.0.0"]
+native_requirements = ["Provided by separately installed driver wheel"]
+license = "MIT (adapter); driver license: see package THIRD_PARTY_NOTICES.md"
+origin = "original Hub adapter"
+install = "uv pip install \"git+https://github.com/mpsgitai/tarel-hub.git#subdirectory=packages/connector-duckdb\""
+real_source_evidence = "DuckDB 2.0.0 local file fixture (trusted local files only; no network auth)"
+
+[[extension]]
+id = "connector-postgres"
+capabilities = ["connector"]
+status = "experimental"
+package = "tarel-connector-postgres"
+import_name = "tarel_connector_postgres"
+path = "packages/connector-postgres"
+entry_point = { group = "tarel.connectors", name = "postgres" }
+host_contract = "connector.v1"
+host_versions = "tarel>=0.0.3,<0.1"
+dependencies = ["psycopg==3.3.9"]
+native_requirements = ["System libpq, or optional [binary] extra (psycopg-binary)"]
+license = "MIT (adapter); driver license: see package THIRD_PARTY_NOTICES.md"
+origin = "original Hub adapter"
+install = "uv pip install \"git+https://github.com/mpsgitai/tarel-hub.git#subdirectory=packages/connector-postgres[binary]\""
+real_source_evidence = "PostgreSQL 17.7 and 16.3 servers; URL or libpq auth (pgpass/SSPI/GSSAPI/peer); column-level SELECT privilege filtering"
+
+[[extension]]
+id = "connector-mysql"
+capabilities = ["connector"]
+status = "experimental"
+package = "tarel-connector-mysql"
+import_name = "tarel_connector_mysql"
+path = "packages/connector-mysql"
+entry_point = { group = "tarel.connectors", name = "mysql" }
+host_contract = "connector.v1"
+host_versions = "tarel>=0.0.3,<0.1"
+dependencies = ["PyMySQL==1.2.4"]
+native_requirements = []
+license = "MIT (adapter); driver license: see package THIRD_PARTY_NOTICES.md"
+origin = "original Hub adapter"
+install = "uv pip install \"git+https://github.com/mpsgitai/tarel-hub.git#subdirectory=packages/connector-mysql\""
+real_source_evidence = "MySQL 8.4.13 and MariaDB 11.4.13 container fixtures; URL auth only; no configurable TLS CA/hostname enforcement yet (use only on trusted networks)"
+
+[[extension]]
+id = "connector-clickhouse"
+capabilities = ["connector"]
+status = "experimental"
+package = "tarel-connector-clickhouse"
+import_name = "tarel_connector_clickhouse"
+path = "packages/connector-clickhouse"
+entry_point = { group = "tarel.connectors", name = "clickhouse" }
+host_contract = "connector.v1"
+host_versions = "tarel>=0.0.3,<0.1"
+dependencies = ["clickhouse-connect==1.13.0"]
+native_requirements = ["Optional C extensions inside the clickhouse-connect wheel"]
+license = "MIT (adapter); driver license: see package THIRD_PARTY_NOTICES.md"
+origin = "original Hub adapter"
+install = "uv pip install \"git+https://github.com/mpsgitai/tarel-hub.git#subdirectory=packages/connector-clickhouse\""
+real_source_evidence = "ClickHouse 25.8.33.6 container fixture; URL auth only"
+
+[[extension]]
+id = "connector-mongodb"
+capabilities = ["connector"]
+status = "experimental"
+package = "tarel-connector-mongodb"
+import_name = "tarel_connector_mongodb"
+path = "packages/connector-mongodb"
+entry_point = { group = "tarel.connectors", name = "mongodb" }
+host_contract = "connector.v1"
+host_versions = "tarel>=0.0.3,<0.1"
+dependencies = ["pymongo==4.19.0"]
+native_requirements = ["Provided by separately installed driver wheel"]
+license = "MIT (adapter); driver license: see package THIRD_PARTY_NOTICES.md"
+origin = "original Hub adapter"
+install = "uv pip install \"git+https://github.com/mpsgitai/tarel-hub.git#subdirectory=packages/connector-mongodb\""
+real_source_evidence = "MongoDB 8.0 container fixture; URL auth only"

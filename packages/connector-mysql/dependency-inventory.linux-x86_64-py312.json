@@ -1,0 +1,40 @@
+{
+  "note": "What one fresh environment resolved. Evidence for review, not legal advice.",
+  "open_findings": [],
+  "platform": "linux-x86_64-py312",
+  "resolved": [
+    {
+      "license": "MIT",
+      "license_basis": "License-Expression",
+      "license_files": [
+        "pymysql-1.2.4.dist-info/licenses/LICENSE"
+      ],
+      "name": "PyMySQL",
+      "native_files": [],
+      "version": "1.2.4"
+    },
+    {
+      "license": "MIT",
+      "license_basis": "License-Expression",
+      "license_files": [
+        "tarel-0.0.5.dist-info/licenses/LICENSE",
+        "tarel-0.0.5.dist-info/licenses/THIRD_PARTY_NOTICES.md",
+        "tarel/ui/static/CYTOSCAPE_LICENSE.txt"
+      ],
+      "name": "tarel",
+      "native_files": [],
+      "version": "0.0.5"
+    },
+    {
+      "license": "MIT",
+      "license_basis": "License-Expression",
+      "license_files": [
+        "tarel_connector_mysql-0.0.1.dist-info/licenses/LICENSE",
+        "tarel_connector_mysql-0.0.1.dist-info/licenses/THIRD_PARTY_NOTICES.md"
+      ],
+      "name": "tarel-connector-mysql",
+      "native_files": [],
+      "version": "0.0.1"
+    }
+  ]
+}
