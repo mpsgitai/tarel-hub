@@ -32,6 +32,7 @@ jobs:
       - name: Validate catalog and licenses
         run: |
           python tools/catalog.py validate
+          python tools/catalog.py export-json --check
           python tools/check_licenses.py
       - name: Run contract tests
         run: pytest contract-tests/ -q
